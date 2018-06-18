@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: cloud-register-center
+---
+spring:
+  profiles: peer1
+server:
+  port: 9000
+eureka:
+  instance:
+    appname: peer1
+  client:
+    service-url:
+     defaultZone: http://peer2:9001/eureka/,http://peer3:9002/eureka/
+---
+spring:
+  profiles: peer2
+server:
+  port: 9001
+eureka:
+  instance:
+    appname: peer2
+  client:
+    service-url:
+     defaultZone: http://peer3:9002/eureka/,http://peer1:9000/eureka/
+---
+spring:
+  profiles: peer3
+server:
+  port: 9002
+eureka:
+  instance:
+    appname: peer3
+  client:
+    service-url:
+     defaultZone: http://peer1:9000/eureka/,http://peer2:9001/eureka/

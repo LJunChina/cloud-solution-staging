@@ -1,0 +1,3 @@
+rootProject.name = 'cloud-solution-staging'
+include 'cloud-register-center'
+
