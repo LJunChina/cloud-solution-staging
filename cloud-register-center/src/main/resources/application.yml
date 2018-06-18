@@ -1,6 +1,12 @@
 spring:
   application:
     name: cloud-register-center
+security:
+  basic:
+    enabled: true
+  user:
+    name: eureka
+    password: eureka
 ---
 spring:
   profiles: peer1
@@ -22,7 +28,7 @@ eureka:
     appname: peer2
   client:
     service-url:
-     defaultZone: http://peer3:9002/eureka/,http://peer1:9000/eureka/
+     defaultZone: http://eureka:eureka@peer3:9002/eureka/,http://eureka:eureka@peer1:9000/eureka/
 ---
 spring:
   profiles: peer3
@@ -33,4 +39,4 @@ eureka:
     appname: peer3
   client:
     service-url:
-     defaultZone: http://peer1:9000/eureka/,http://peer2:9001/eureka/
+     defaultZone: http://eureka:eureka@peer1:9000/eureka/,http://eureka:eureka@peer2:9001/eureka/
