@@ -1,7 +1,15 @@
+group = 'com.cloud.jon.china'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
+}
+
+//插件配置
 buildscript {
-	ext {
-		springBootVersion = '1.5.8.RELEASE'
-	}
 	repositories {
 		maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
 	}
@@ -9,32 +17,10 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group = 'com.cloud.jon.china'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
-repositories {
-	maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
-}
-
-
-ext {
-	springCloudVersion = 'Dalston.SR4'
-}
-
-dependencies {
-	compile('org.springframework.cloud:spring-cloud-starter-eureka-server')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }
+
+

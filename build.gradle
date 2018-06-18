@@ -1,14 +1,45 @@
 group 'com.cloud.jon.china'
 version '0.0.1-SNAPSHOT'
+//子项目通用配置
+subprojects{
 
-apply plugin: 'java'
+    //插件配置
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
 
-sourceCompatibility = 1.8
+    // JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
+    //指定编码方式
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //定义版本号
+    ext {
+        springCloudVersion = 'Dalston.SR4'
+        springBootVersion = '1.5.8.RELEASE'
+    }
+
+    repositories {
+        maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+    }
+
+    configurations {
+        // 所有需要忽略的包定义在此
+        all*.exclude group: 'commons-logging'
+    }
+
+    repositories {
+        maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+    }
+
+    dependencies {
+        //通用依赖
+        compile('com.cloud:common:0.0.2-SNAPSHOT')
+        //测试依赖
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+
+
 }
