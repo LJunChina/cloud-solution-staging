@@ -1,0 +1,166 @@
+<div class="row">
+    <div class="sixteen wide column">
+        <div class="ui segments">
+            <div class="ui segment">
+                <h4 class="ui header" style="display: inline-block">
+                    业务系统管理
+                </h4>
+                <button class="ui basic button modaleffect add-system" style="display: inline-block;margin-left: 10px" data-value="horizontal flip">
+                    <i class="icon plus"></i>
+                    新增业务系统
+                </button>
+            </div>
+            <div class="ui segment">
+                <table id="system_table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui standard modal" id="add-system">
+    <div class="header">
+        新增业务系统
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="system" autocomplete="off">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>业务系统名称</label>
+                            <input placeholder="系统名称" name="systemName" type="text">
+                        </div>
+                        <div class="field">
+                            <label>业务系统中文名称</label>
+                            <input placeholder="中文名称" name="systemChn" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>系统HOST</label>
+                        <input placeholder="HOST" name="systemHost" type="text">
+                    </div>
+                    <div class="field">
+                        <label>系统context</label>
+                        <input placeholder="系统context" name="systemContext" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled icon button" id="submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui standard modal" id="update-system">
+    <div class="header">
+        更新业务系统
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="new_system" autocomplete="off">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>业务系统名称</label>
+                            <input placeholder="系统名称" name="systemName" type="text">
+                        </div>
+                        <div class="field">
+                            <label>业务系统中文名称</label>
+                            <input placeholder="中文名称" name="systemChn" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>系统HOST</label>
+                        <input placeholder="HOST" name="systemHost" type="text">
+                    </div>
+                    <div class="field">
+                        <label>系统context</label>
+                        <input placeholder="系统context" name="systemContext" type="text">
+                    </div>
+                    <input type="hidden" name="id">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled icon button" id="submit_update">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<script src="dist/components/system.js"></script>
+<script type="application/javascript">
+    $(function () {
+        var $submit = $("#submit");
+        $("button.add-system").on("click", function () {
+            var a = $(this).attr("data-value");
+            $("#add-system").modal("setting", "transition", a).modal("show");
+        });
+        $submit.on('click',function () {
+            $('#system').submit();
+        });
+        $('#system').form({
+            fields: {
+                systemName: {
+                    identifier  : 'systemName',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入系统名称'
+                        }
+                    ]
+                },
+                systemHost: {
+                    identifier  : 'systemHost',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入系统host'
+                        }
+                    ]
+                }
+            },
+            onSuccess:submitForm
+        });
+        $('#system').submit(function(e){
+            return false;
+        });
+        function submitForm() {
+            var formData = $('#add-system input').serializeArray();
+            $.post("/system-info/save-system-info",formData,function (data) {
+                var resultData = JSON.parse(data);
+                if(resultData.code === '0000'){
+                    swal({
+                        text: "处理成功！",
+                        type: "success",
+                        confirmButtonText: '确认',
+                        confirmButtonColor: '#4cd964'
+                    }).then(function (e) {
+                        if(e){
+                            $("#add-system").modal('hide');
+                            //重置表单
+                            $('#system')[0].reset();
+                            initTable(aoColumn,aoColumnDefs);
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>

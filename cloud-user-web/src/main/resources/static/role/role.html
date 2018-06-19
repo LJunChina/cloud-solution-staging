@@ -1,0 +1,251 @@
+<div class="row">
+    <div class="sixteen wide column">
+        <div class="ui segments">
+            <div class="ui segment">
+                <h4 class="ui header" style="display: inline-block">
+                    系统角色管理
+                </h4>
+                <button class="ui basic button role-add" style="display: inline-block;margin-left: 10px" data-value="horizontal flip">
+                    <i class="icon plus"></i>
+                    新增角色
+                </button>
+            </div>
+            <div class="ui segment">
+                <table id="role_table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui standard modal" id="role-modal">
+    <div class="header">
+        新增角色
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" autocomplete="off" id="role">
+                    <input type="hidden" value="1" name="itemType">
+                    <div class="field">
+                        <label>角色名称</label>
+                        <input placeholder="角色名称" name="roleName" type="text">
+                    </div>
+                    <div class="inline fields">
+                        <label>角色类型</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="roleType" checked="checked" value="00">
+                                <label>管理员</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="roleType" value="01">
+                                <label>普通用户</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown">
+                            <input type="hidden" name="appId">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="system-data">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>角色描述信息</label>
+                        <input placeholder="角色描述信息" name="describe" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled icon button" id="submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui standard modal" id="user-modal">
+    <div class="header">
+        菜单列表
+    </div>
+    <div style="margin: 16px;padding: 1px">
+        <table id="user_table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+        </table>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right positive labeled icon button" id="allocation">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui standard modal" id="operation-modal">
+    <div class="header">
+        操作列表
+    </div>
+    <div style="margin: 16px;padding: 1px">
+        <table id="operation-table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+        </table>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right positive labeled icon button" id="allocation-op">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+
+<div class="ui standard modal" id="update-role-modal">
+    <div class="header">
+        更新角色
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" autocomplete="off" id="update-role">
+                    <div class="field">
+                        <label>角色名称</label>
+                        <input placeholder="角色名称" name="roleName" type="text">
+                    </div>
+                    <div class="inline fields">
+                        <label>角色类型</label>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="roleType" checked="checked" value="00">
+                                <label>管理员</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="roleType" value="01">
+                                <label>普通用户</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown" id="update-role-dropdown">
+                            <input type="hidden" name="appId">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="update-system-data">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>角色描述信息</label>
+                        <input placeholder="角色描述信息" name="describe" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right positive labeled icon button" id="update-role-submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<script src="../dist/components/role.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $(".ui.dropdown").dropdown({
+            allowCategorySelection: true,
+            transition: "fade up"
+        });
+        var $submit = $("#submit");
+        $(".role-add").on("click", function () {
+            var a = $(this).attr("data-value");
+            //重置form
+            $('#role')[0].reset();
+            $("#role-modal").modal("setting", "transition", a).modal("show");
+            $.getJSON('/system-info/get-system-info',{pageIndex:1,pageSize:99999},function (resp) {
+                if(resp && resp.code === '0000'){
+                    var list = resp.data.list;
+                    if(list && list.length > 0){
+                        $("#system-data").html("");
+                        $.each(list,function () {
+                            $("#system-data").append('<div class="item" data-value="'+this.id+'">'+this.systemName+'</div>');
+                        });
+                    }
+                }else {
+                    self.location = "../login.html";
+                }
+            });
+        });
+        $submit.on('click',function () {
+            $('#role').submit();
+        });
+        $('#role').form({
+            fields: {
+                name: {
+                    identifier  : 'roleName',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入角色名称'
+                        }
+                    ]
+                },
+                itemUri: {
+                    identifier  : 'roleType',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入角色类型'
+                        }
+                    ]
+                }
+            },
+            onSuccess:submitForm
+        });
+        $('#role').submit(function(e){
+            return false;
+        });
+        function submitForm() {
+            var formData = $('#role').serializeArray();
+            $.post("/role/save-role",formData,function (data) {
+                var resultData = JSON.parse(data);
+                if(resultData.code === '0000'){
+                    swal({
+                        text: "处理成功！",
+                        type: "success",
+                        confirmButtonText: '确认',
+                        confirmButtonColor: '#4cd964'
+                    }).then(function (e) {
+                        if(e){
+                            $(".ui.modal.standard").modal('hide');
+                            initTable(roleAoColumn,roleAoColumnDefs,"/role/get-roles","#role_table");
+                        }
+                    });
+                }
+            });
+        }
+    });
+</script>

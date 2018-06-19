@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.base.schedule.job.dao.ScheduleTaskDao">
+    <resultMap id="BaseResultMap" type="com.cloud.base.schedule.job.model.ScheduleTask">
+        <id column="ID" jdbcType="BIGINT" property="id" />
+        <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+        <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+        <result column="JOB_STATUS" jdbcType="VARCHAR" property="jobStatus" />
+        <result column="CRON_EXPRESSION" jdbcType="VARCHAR" property="cronExpression" />
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+        <result column="BEAN_CLASS" jdbcType="VARCHAR" property="beanClass" />
+        <result column="IS_CONCURRENT" jdbcType="VARCHAR" property="isConcurrent" />
+        <result column="METHOD_NAME" jdbcType="VARCHAR" property="methodName" />
+        <result column="REMOTE_URI" jdbcType="VARCHAR" property="remoteUri" />
+        <result column="JOB_TYPE" jdbcType="VARCHAR" property="jobType" />
+        <result column="JOB_PARAMS" jdbcType="VARCHAR" property="jobParams" />
+        <result column="HTTP_METHOD" jdbcType="VARCHAR" property="httpMethod" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID,CREATE_AT,CREATE_BY,UPDATE_AT,UPDATE_BY,JOB_NAME,JOB_GROUP,JOB_STATUS,CRON_EXPRESSION,DESCRIPTION,
+        BEAN_CLASS,IS_CONCURRENT,METHOD_NAME,REMOTE_URI,JOB_TYPE,JOB_PARAMS,HTTP_METHOD
+    </sql>
+    <insert id="save" parameterType="com.cloud.base.schedule.job.model.ScheduleTask">
+        INSERT INTO schedule_task
+        (CREATE_AT,
+         CREATE_BY,
+         UPDATE_AT,
+         UPDATE_BY,
+         JOB_NAME,
+         JOB_GROUP,
+         JOB_STATUS,
+         CRON_EXPRESSION,
+         DESCRIPTION,
+         BEAN_CLASS,
+         IS_CONCURRENT,
+         METHOD_NAME,
+         REMOTE_URI,
+         JOB_TYPE,
+         JOB_PARAMS,
+         HTTP_METHOD)
+        VALUES
+           (NOW(),'system',NOW(),'system',
+           #{jobName,jdbcType=VARCHAR},
+           #{jobGroup,jdbcType=VARCHAR},
+           #{jobStatus,jdbcType=VARCHAR},
+           #{cronExpression,jdbcType=VARCHAR},
+           #{description,jdbcType=VARCHAR},
+           #{beanClass,jdbcType=VARCHAR},
+           #{isConcurrent,jdbcType=VARCHAR},
+           #{methodName,jdbcType=VARCHAR},
+           #{remoteUri,jdbcType=VARCHAR},
+           #{jobType,jdbcType=VARCHAR},
+           #{jobParams,jdbcType=VARCHAR},
+           #{httpMethod,jdbcType=VARCHAR})
+    </insert>
+    <select id="getAllTasks" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" /> FROM schedule_task WHERE JOB_STATUS = '0'
+    </select>
+    <!--定时任务分页查询-->
+    <select id="getAllJobsByPage" parameterType="com.cloud.base.schedule.job.web.dto.ScheduleTaskRequest" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM schedule_task
+        WHERE 1 = 1
+        <if test="jobName != null and jobName != ''">
+            AND JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        </if>
+        <if test="jobGroup != null and jobGroup != ''">
+            AND JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+        </if>
+        <if test="jobStatus != null and jobStatus != ''">
+            AND JOB_STATUS = #{jobStatus,jdbcType=VARCHAR}
+        </if>
+    </select>
+    <!--根据id删除定时任务-->
+    <delete id="deleteJobById">
+        DELETE FROM schedule_task WHERE ID = #{id,jdbcType=NUMERIC}
+    </delete>
+    <!--根据id查询定时任务-->
+    <select id="getJobById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM schedule_task WHERE ID = #{id,jdbcType=NUMERIC}
+    </select>
+    <!--更新定时任务-->
+    <update id="updateJob" parameterType="com.cloud.base.schedule.job.model.ScheduleTask">
+        UPDATE schedule_task
+        SET
+            CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+            JOB_NAME = #{jobName,jdbcType=VARCHAR},
+            JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+            JOB_STATUS = #{jobStatus,jdbcType=VARCHAR},
+            JOB_PARAMS = #{jobParams,jdbcType=VARCHAR},
+            JOB_TYPE = #{jobType,jdbcType=VARCHAR},
+            REMOTE_URI = #{remoteUri,jdbcType=VARCHAR},
+            HTTP_METHOD = #{httpMethod,jdbcType=VARCHAR},
+            DESCRIPTION = #{description,jdbcType=VARCHAR},
+            METHOD_NAME = #{methodName,jdbcType=VARCHAR},
+            BEAN_CLASS = #{beanClass,jdbcType=VARCHAR},
+            UPDATE_AT = NOW(),
+            UPDATE_BY = 'system'
+        WHERE ID = #{id,jdbcType=NUMERIC}
+    </update>
+</mapper>

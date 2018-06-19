@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 minutes">
+    <!-- ==================================================================================== -->
+    <property name="logDir" value="/opt/cloud/base/web" />
+    <!-- 打印到控制台 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-%logger{5}-[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ==================================================================================== -->
+    <appender name="infolog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/info/log.%d{yyyy-MM-dd.HH}.%i.log.gz
+            </fileNamePattern>
+            <!-- 限制文件最大保存时间为15天; 15*24=360 -->
+            <maxHistory>360</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 当文件大小超过60M时触发滚动,这里设置60M -->
+                <maxFileSize>60MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-%logger{5}-[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="debuglog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/debug/log.%d{yyyy-MM-dd.HH}.%i.log.gz
+            </fileNamePattern>
+            <!-- 限制文件最大保存时间为15天; 15*24=360 -->
+            <maxHistory>360</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 当文件大小超过60M时触发滚动,这里设置60M -->
+                <maxFileSize>60MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-%logger{5}-[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="errorlog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logDir}/error/log.%d{yyyy-MM-dd.HH}.%i.log.gz
+            </fileNamePattern>
+            <!-- 限制文件最大保存时间为15天; 15*24=360 -->
+            <maxHistory>360</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 当文件大小超过60M时触发滚动,这里设置60M -->
+                <maxFileSize>60MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level-%logger{5}-[%L] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 异步日志配置 -->
+    <appender name="infolog_async" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>5000</discardingThreshold>
+        <queueSize>50000</queueSize>
+        <appender-ref ref="infolog" />
+    </appender>
+
+    <appender name="errorlog_async" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>5000</discardingThreshold>
+        <queueSize>50000</queueSize>
+        <appender-ref ref="errorlog" />
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="stdout" />
+        <appender-ref ref="debuglog" />
+        <appender-ref ref="infolog_async" />
+        <appender-ref ref="errorlog_async" />
+    </root>
+</configuration>

@@ -1,3 +1,7 @@
 rootProject.name = 'cloud-solution-staging'
 include 'cloud-register-center'
 include 'cloud-user-microservice'
+include 'cloud-user-web'
+include 'cloud-common'
+include 'cloud-sso-client'
+include 'cloud-schedule-center'

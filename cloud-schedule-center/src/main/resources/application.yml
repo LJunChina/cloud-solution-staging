@@ -1,0 +1,43 @@
+server:
+  port: 8030
+spring:
+  application:
+    name: cloud-schedule-center
+
+#####################################################################################################
+# mysql  属性及连接池配置
+  datasource:
+    url: jdbc:mysql://115.159.31.229:3306/schedule_center?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: CloudBase123!@#
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      max-active: 20
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+
+
+
+
+
+
+
+
+

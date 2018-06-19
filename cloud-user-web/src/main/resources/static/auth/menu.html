@@ -1,0 +1,226 @@
+<div class="row">
+    <div class="sixteen wide column">
+        <div class="ui segments">
+            <div class="ui segment">
+                <h4 class="ui header" style="display: inline-block">
+                    菜单权限管理
+                </h4>
+                <button class="ui basic button menu-add" style="display: inline-block;margin-left: 10px" data-value="horizontal flip">
+                    <i class="icon plus"></i>
+                    新增菜单
+                </button>
+            </div>
+            <div class="ui segment">
+                <table id="menu_table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui standard modal" id="menu-modal">
+    <div class="header">
+        新增菜单
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="menu">
+                    <div class="field">
+                        <label>菜单名称</label>
+                        <input placeholder="菜单名称" name="name" type="text">
+                    </div>
+                    <div class="field">
+                        <label>请求路径</label>
+                        <input placeholder="请求路径" name="itemUri" type="text">
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown">
+                            <input type="hidden" name="appName">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="system-data">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>父级菜单</label>
+                        <div class="ui fluid search selection dropdown">
+                            <input type="hidden" name="parentId">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">父级菜单</div>
+                            <div class="menu" tabindex="-1" id="menu-data">
+                                <div class="item" data-value="">无</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>菜单图标</label>
+                        <input placeholder="菜单图标" name="icon" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled icon button" id="submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui standard modal" id="update-menu-modal">
+    <div class="header">
+        更新菜单
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="update-menu-form">
+                    <div class="field">
+                        <label>菜单名称</label>
+                        <input placeholder="菜单名称" name="name" type="text">
+                    </div>
+                    <div class="field">
+                        <label>请求路径</label>
+                        <input placeholder="请求路径" name="itemUri" type="text">
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown" id="update-menu-dropdown">
+                            <input type="hidden" name="appName">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="update-menu-system-data">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>父级菜单</label>
+                        <div class="ui fluid search selection dropdown" id="update-menu-parent-dropdown">
+                            <input type="hidden" name="parentId">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">父级菜单</div>
+                            <div class="menu" tabindex="-1" id="update-parent-menu-data">
+                                <div class="item" data-value="">无</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>菜单图标</label>
+                        <input placeholder="菜单图标" name="icon" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled positive icon button" id="update-submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+<script src="../dist/components/menu.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $(".ui.dropdown").dropdown({
+            allowCategorySelection: true,
+            transition: "fade up"
+        });
+        var $submit = $("#submit");
+        $(".menu-add").on("click", function () {
+            var a = $(this).attr("data-value");
+            //重置form
+            $('#menu')[0].reset();
+            $("#menu-modal").modal("setting", "transition", a).modal("show");
+            $.getJSON('/system-info/get-system-info',{pageIndex:1,pageSize:99999},function (resp) {
+                if(resp && resp.code === '0000'){
+                    var list = resp.data.list;
+                    if(list && list.length > 0){
+                        $("#system-data").html("");
+                        $.each(list,function () {
+                            $("#system-data").append('<div class="item" data-value="'+this.id+'">'+this.systemName+'</div>');
+                        });
+                    }
+                }else {
+                    self.location = "../login.html";
+                }
+            });
+            $.getJSON('/auth/get-all-auth',{pageIndex:1,pageSize:99999,itemType:'1',appName:''},function (resp) {
+                if(resp && resp.code === '0000'){
+                    var list = resp.data.list;
+                    if(list && list.length > 0){
+                        $.each(list,function () {
+                            $("#menu-data").append('<div class="item" data-value="'+this.id+'">'+this.name+'</div>');
+                        });
+                    }
+                }else {
+                    self.location = "../login.html";
+                }
+
+            });
+        });
+        $submit.on('click',function () {
+            $('#menu').submit();
+        });
+        $('#menu').form({
+            fields: {
+                name: {
+                    identifier  : 'name',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入菜单名称'
+                        }
+                    ]
+                },
+                itemUri: {
+                    identifier  : 'itemUri',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入菜单请求路径'
+                        }
+                    ]
+                }
+            },
+            onSuccess:submitForm
+        });
+        $('#menu').submit(function(e){
+            return false;
+        });
+        function submitForm() {
+            var formData = $('#menu input').serializeArray();
+            formData.push({name:'itemType',value:'1'});
+            $.post("/auth/save-auth",formData,function (data) {
+                var resultData = JSON.parse(data);
+                if(resultData.code === '0000'){
+                    swal({
+                        text: "处理成功！",
+                        type: "success",
+                        confirmButtonText: '确认',
+                        confirmButtonColor: '#4cd964'
+                    }).then(function (e) {
+                        if(e){
+                            $(".ui.modal.standard").modal('hide');
+                            initTable(menuAoColumns,menuDfColumns,'/auth/get-all-auth',"#menu_table");
+                        }
+                    });
+
+                }
+            });
+        }
+    });
+</script>

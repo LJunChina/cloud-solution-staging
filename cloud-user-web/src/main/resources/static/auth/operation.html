@@ -1,0 +1,184 @@
+<div class="row">
+    <div class="sixteen wide column">
+        <div class="ui segments">
+            <div class="ui segment">
+                <h4 class="ui header" style="display: inline-block">
+                    操作权限管理
+                </h4>
+                <button class="ui basic button operation-add" style="display: inline-block;margin-left: 10px" data-value="horizontal flip">
+                    <i class="icon plus"></i>
+                    新增操作
+                </button>
+            </div>
+            <div class="ui segment">
+                <table id="operation-table" class="ui compact selectable striped celled table tablet stackable" cellspacing="0" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="ui standard modal" id="operation-modal">
+    <div class="header">
+        新增操作
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="operation">
+                    <div class="field">
+                        <label>操作名称</label>
+                        <input placeholder="操作名称" name="name" type="text">
+                    </div>
+                    <div class="field">
+                        <label>请求路径</label>
+                        <input placeholder="请求路径" name="itemUri" type="text">
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown">
+                            <input type="hidden" name="appName">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="system-data">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right labeled icon button" id="submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<div class="ui standard modal" id="update-operation-modal">
+    <div class="header">
+        更新操作
+    </div>
+    <div class="row">
+        <div class="sixteen wide tablet sixteen wide computer column">
+            <div class="ui segments">
+                <form class="ui form segment form4" id="update-operation">
+                    <div class="field">
+                        <label>操作名称</label>
+                        <input placeholder="操作名称" name="name" type="text">
+                    </div>
+                    <div class="field">
+                        <label>请求路径</label>
+                        <input placeholder="请求路径" name="itemUri" type="text">
+                    </div>
+                    <div class="field">
+                        <label>所属系统</label>
+                        <div class="ui fluid search selection dropdown" id="update-operation-dropdown">
+                            <input type="hidden" name="appName">
+                            <i class="dropdown icon"></i>
+                            <input class="search" autocomplete="off" tabindex="0"><div class="default text">所属系统</div>
+                            <div class="menu" tabindex="-1" id="update-system-data">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            关闭
+        </div>
+        <div class="ui right positive labeled icon button" id="update-operation-submit">
+            提交
+            <i class="checkmark icon"></i>
+        </div>
+    </div>
+</div>
+
+<script src="../dist/components/operation.js"></script>
+<script type="application/javascript">
+    $(function () {
+        $(".ui.dropdown").dropdown({
+            allowCategorySelection: true,
+            transition: "fade up"
+        });
+        var $submit = $("#submit");
+        $(".operation-add").on("click", function () {
+            var a = $(this).attr("data-value");
+            //重置form
+            $('#operation')[0].reset();
+            $("#operation-modal").modal("setting", "transition", a).modal("show");
+            $.getJSON('/system-info/get-system-info',{pageIndex:1,pageSize:99999},function (resp) {
+                if(resp && resp.code === '0000'){
+                    var list = resp.data.list;
+                    if(list && list.length > 0){
+                        $("#system-data").html("");
+                        $.each(list,function () {
+                            $("#system-data").append('<div class="item" data-value="'+this.id+'">'+this.systemName+'</div>');
+                        });
+                    }
+                }else {
+                    self.location = "../login.html";
+                }
+            });
+        });
+        $submit.on('click',function () {
+            $('#operation').submit();
+        });
+        $('#operation').form({
+            fields: {
+                name: {
+                    identifier  : 'name',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入操作名称'
+                        }
+                    ]
+                },
+                itemUri: {
+                    identifier  : 'itemUri',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入操作请求路径'
+                        }
+                    ]
+                }
+            },
+            onSuccess:submitForm
+        });
+        $('#operation').submit(function(e){
+            return false;
+        });
+        function submitForm() {
+            var formData = $('#operation input').serializeArray();
+            formData.push({name:'itemType',value:'0'});
+            $.post("/auth/save-auth",formData,function (data) {
+                var resultData = JSON.parse(data);
+                if(resultData.code === '0000'){
+                    swal({
+                        text: "处理成功！",
+                        type: "success",
+                        confirmButtonText: '确认',
+                        confirmButtonColor: '#4cd964'
+                    }).then(function (e) {
+                        if(e){
+                            $(".ui.modal.standard").modal('hide');
+                            initTable(operationAoColumns,operationDefColumns,'/auth/get-all-auth',"#operation-table");
+                        }
+                    });
+
+                }
+            });
+        }
+    });
+</script>

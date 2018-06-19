@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cloud-base-web
+  resources:
+    static-locations: classpath:/static/
+  cloud:
+    consul:
+      host: 115.159.152.121
+      port: 8500
+server:
+  port: 8020
+feign:
+  hystrix:
+    enabled: true
+sso:
+  domain : http://local.joninfo.cn:8020/login.html
+  appName : user-app
+  appUrl : http://local.joninfo.cn:8020/index.html

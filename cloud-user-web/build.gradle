@@ -1,0 +1,30 @@
+group = 'com.cloud.jon.china'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+	compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
+	compile 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+	compile 'org.springframework.cloud:spring-cloud-starter-feign'
+	compile 'com.cloud:cloud-sso-client:0.0.2-SNAPSHOT'
+	compile 'com.github.penggle:kaptcha:2.3.2'
+}
+
+//插件配置
+buildscript {
+	repositories {
+		maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+

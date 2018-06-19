@@ -1,0 +1,89 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.8.RELEASE'
+	}
+	repositories {
+		maven {
+			url 'http://115.159.152.121:8080/nexus/content/groups/public/'
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: "org.sonarqube"
+apply plugin: 'org.springframework.boot'
+
+group = 'com.cloud'
+version = '0.0.2-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	maven {
+		url 'http://115.159.152.121:8080/nexus/content/groups/public/'
+	}
+}
+
+
+ext {
+	springCloudVersion = 'Dalston.SR4'
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('com.cloud:common:0.0.2-SNAPSHOT')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			pom.groupId = "com.cloud"
+			pom.version = version
+			pom.artifactId = "cloud-sso-client"
+			pom.project {
+				name project.name
+				packaging 'jar'
+				description 'sso接入客户端'
+				developers {
+					developer {
+						id 'cloud'
+						name 'JonChina'
+					}
+				}
+			}
+			repository(url: "http://115.159.152.121:8080/nexus/content/repositories/thirdparty/") {
+				authentication(userName: "admin", password: "admin123")
+			}
+		}
+	}
+}
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from 'src/main/java'
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+sonarqube{
+	properties{
+		property "sonar.projectName","cloud-sso-client"
+		property "sonar.sources","src\\main\\java"
+	}
+}
+
+

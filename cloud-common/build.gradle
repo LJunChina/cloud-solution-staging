@@ -1,0 +1,58 @@
+group 'com.cloud'
+version '0.0.2-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url 'http://115.159.152.121:8080/nexus/content/groups/public/'
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = "com.cloud"
+            pom.version = version
+            pom.artifactId = "common"
+            pom.project {
+                name project.name
+                packaging 'jar'
+                description '基础平台公用jar'
+                developers {
+                    developer {
+                        id 'cloud'
+                        name 'JonChina'
+                    }
+                }
+            }
+            repository(url: "http://115.159.152.121:8080/nexus/content/repositories/thirdparty/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+        }
+    }
+}
+
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+
+dependencies {
+    compile('com.alibaba:fastjson:1.2.40')
+    compile('commons-codec:commons-codec:1.9')
+    compile 'io.jsonwebtoken:jjwt:0.9.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

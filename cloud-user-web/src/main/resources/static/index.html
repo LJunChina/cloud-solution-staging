@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>基础信息平台</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link href="dist/semantic.min.css" rel="stylesheet" />
+    <link href="libs/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="dist/main.css" rel="stylesheet">
+    <link href="libs/sweetalert2/sweetalert2.min.css" rel="stylesheet">
+    <link href="libs/pacejs/pace.css" rel="stylesheet" />
+    <style>
+        /*进度条样式*/
+        .dataTables_wrapper .dataTables_processing {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            border : none;
+            padding : 2px;
+            width: 100%;
+            height: 40px;
+            margin-left: -50%;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            cursor : wait;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="contextWrap">
+    <!--sidebar-->
+    <div class="ui sidebar vertical left menu overlay  borderless visible sidemenu inverted  grey" style="-webkit-transition-duration: 0.1s; transition-duration: 0.1s;" data-color="grey">
+        <a class="item logo" href="index.html">
+            <img src="assets/images/logo1.png" alt="logo" /><img src="assets/images/thumblogo.png" alt="logo" class="displaynone" />
+        </a>
+        <!--菜单-->
+        <div class="ui accordion inverted">
+        </div>
+        <!--收缩菜单-->
+        <div class="ui dropdown item displaynone scrolling">
+            <span>Dashboard</span>
+            <i class="ion-speedometer icon"></i>
+
+            <div class="menu">
+                <div class="header">
+                    Dashboard
+                </div>
+                <div class="ui divider"></div>
+                <a class="item" href="index.html">
+                    Dashboard v1
+                </a>
+            </div>
+        </div>
+        <div class="ui divider"></div>
+    </div>
+    <!--sidebar-->
+    <div class="pusher">
+        <!--顶部-->
+        <div class="navslide navwrap">
+            <div class="ui menu icon borderless grid" data-color="inverted white">
+                <a class="item labeled openbtn">
+                    <i class="ion-navicon-round big icon"></i>
+                </a>
+                <div class="item ui colhidden">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search icon"></i>
+                    </div>
+                </div>
+                <div class="right menu colhidden">
+
+                    <div class="ui dropdown item labeled icon">
+                        <i class="bell icon"></i>
+                        <div class="ui red label mini circular">6</div>
+                        <div class="menu">
+                            <div class="header">
+                                People You Might Know
+                            </div>
+                            <div class="item">
+                                <img class="ui avatar image" src="img/avatar/people/enid.png" alt="label-image" /> Janice Robinson
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span id="user-name">管理员</span> <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item"><i class="lock icon"></i>修改密码</a>
+                            <a class="item"><i class="user icon"></i>个人信息</a>
+                            <a class="item" href="javascript:;" id="logout"><i class="power icon"></i>退出登录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--navbar-->
+        <!--maincontent-->
+        <div class="mainWrap navslide">
+            <div class="ui equal width left aligned padded grid stackable" id="content">
+                <!--内容区-->
+            </div>
+        </div>
+        <!--maincontent-->
+    </div>
+</div>
+<!--jquery-->
+<script src="libs/jquery.min.js"></script>
+<!--jquery-->
+<!--semantic-->
+<script src="dist/semantic.min.js"></script>
+<!--semantic-->
+<script src="libs/jquery.nicescroll.min.js"></script>
+<script src="libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="libs/cookie/js.cookie.js"></script>
+<script data-pace-options='{ "ajax": true }' src="libs/pacejs/pace.js"></script>
+<script src="libs/datatable/jquery.dataTables.js"></script>
+<script src="dist/custom-datatable.js"></script>
+<script src="libs/custom-datatables.js"></script>
+<script src="dist/main.js"></script>
+<script src="libs/utils.js"></script>
+<script type="application/javascript">
+    $(function () {
+        //拉取菜单数据
+        $.getJSON("/auth/get-all-menus",function (data) {
+            if(data.code === '0000'){
+                var resultData = data.resultData;
+                var $item = $(".ui.accordion.inverted");
+                $.each(resultData,function () {
+                    $item.append('<div class="title item">\n' +
+                        '                <i class="'+this.icon+' titleIcon icon"></i> '+this.name+' <i class="dropdown icon"></i>\n' +
+                        '            </div>');
+                    if(this.child){
+                        var html = "<div class=\"content\">";
+                        $.each(this.child,function () {
+                            var uri = this.itemUri;
+                            html += '<a class="item" href="javascript:;" data-url="'+ uri +'">'+this.name+'</a>';
+                        });
+                        html += "</div>";
+                        $item.append(html);
+                    }
+                });
+                $('.ui.menu a.item').on('click', function () {
+                    $(this)
+                        .addClass('active')
+                        .siblings()
+                        .removeClass('active');
+                    var url = $(this).data("url");
+                    var $content = $("#content");
+                    $content.html("");
+                    $content.load(url,null,function(response,status,xhr){
+                        try {
+                            //捕获非html代码
+                            var result = JSON.parse(response);
+                            $content.html("");
+                            $.info(result.message,function (e) {
+                                if(e){
+                                    self.location.reload(true);
+                                }
+                            });
+                        }catch(err) {
+                            return response;
+                        }
+                    });
+                });
+            }else {
+                self.location.reload(true);
+            }
+        });
+
+        //获取用户信息
+        $.getJSON("/get-user-detail",function (resp) {
+            if(resp.code === "0000"){
+                $("#user-name").html(resp.data.userName);
+            }else {
+                self.location = 'index.html';
+            }
+        });
+        //退出登录
+        $("#logout").on('click',function () {
+           $.post("/logout",{},function (resp) {
+               var result = JSON.parse(resp);
+               if(result && result.code === '0000'){
+                   self.location.reload(true);
+                   return;
+               }
+               $.error("处理失败",null);
+           });
+        });
+    });
+
+</script>
+</body>
+</html>
