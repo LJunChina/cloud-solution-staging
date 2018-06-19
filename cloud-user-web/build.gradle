@@ -8,7 +8,7 @@ dependencies {
 	compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
 	compile 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
 	compile 'org.springframework.cloud:spring-cloud-starter-feign'
-	compile 'com.cloud:cloud-sso-client:0.0.2-SNAPSHOT'
+    compile project(":cloud-sso-client")
 	compile 'com.github.penggle:kaptcha:2.3.2'
 }
 

@@ -48,7 +48,7 @@ dependencies {
     compile 'org.quartz-scheduler:quartz:2.2.3'
     compile 'org.quartz-scheduler:quartz-jobs:2.2.3'
 	compile('com.github.pagehelper:pagehelper-spring-boot-starter:1.2.3')
-	compile('com.cloud:common:0.0.2-SNAPSHOT')
+	compile project(":cloud-common")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

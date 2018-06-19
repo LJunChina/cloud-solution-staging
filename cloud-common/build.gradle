@@ -17,9 +17,9 @@ configurations {
 uploadArchives {
     repositories {
         mavenDeployer {
-            pom.groupId = "com.cloud"
+            pom.groupId = 'com.cloud.jon.china'
             pom.version = version
-            pom.artifactId = "common"
+            pom.artifactId = project.name
             pom.project {
                 name project.name
                 packaging 'jar'
