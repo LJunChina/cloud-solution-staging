@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: cloud-user-microservice
+server:
+  port: 9010
+eureka:
+  instance:
+    appname: localhost
+  client:
+    service-url:
+     defaultZone: http://peer1:9000/eureka/,http://peer2:9001/eureka/,http://peer3:9002/eureka/
