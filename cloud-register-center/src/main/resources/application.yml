@@ -40,3 +40,16 @@ eureka:
   client:
     service-url:
      defaultZone: http://eureka:eureka@peer1:9000/eureka/,http://eureka:eureka@peer2:9001/eureka/
+---
+spring:
+  profiles: peer
+server:
+  port: 9004
+eureka:
+  instance:
+    appname: localhost
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:9004/eureka/

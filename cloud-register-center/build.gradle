@@ -10,6 +10,10 @@ dependencies {
 
 }
 
+bootRun {
+	jvmArgs = ["-Dspring.profiles.active=peer"]
+}
+
 //插件配置
 buildscript {
 	repositories {
