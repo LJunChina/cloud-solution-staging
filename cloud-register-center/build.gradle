@@ -11,7 +11,7 @@ dependencies {
 }
 
 bootRun {
-	jvmArgs = ["-Dspring.profiles.active=peer"]
+	jvmArgs = ["-Dspring.profiles.active=dev"]
 }
 
 //插件配置
