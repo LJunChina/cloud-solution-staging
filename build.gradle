@@ -20,7 +20,7 @@ subprojects{
         springBootVersion = '1.5.8.RELEASE'
     }
     repositories {
-        maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
 
     configurations {
@@ -29,7 +29,7 @@ subprojects{
     }
 
     repositories {
-        maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
     }
 
     dependencies {

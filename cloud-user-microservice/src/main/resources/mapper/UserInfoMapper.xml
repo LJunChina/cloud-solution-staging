@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.jon.china.user.microservice.dao.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.cloud.jon.china.user.microservice.model.UserInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="ORG_ID" jdbcType="VARCHAR" property="orgId" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ID_CARD" jdbcType="VARCHAR" property="idCard" />
+    <result column="IS_ADMIN" jdbcType="VARCHAR" property="isAdmin" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="LOGIN_TOKEN" jdbcType="VARCHAR" property="loginToken" />
+    <result column="CREATE_AT" jdbcType="TIMESTAMP" property="createAt" />
+    <result column="UPDATE_AT" jdbcType="TIMESTAMP" property="updateAt" />
+    <result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+    <result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+    <result column="APP_ID" jdbcType="VARCHAR" property="appId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, USER_NAME, PASSWORD, NAME, SEX, STATUS, ORG_ID, EMAIL, ID_CARD, IS_ADMIN, MOBILE, 
+    LOGIN_TOKEN, CREATE_AT, UPDATE_AT, CREATE_BY, UPDATE_BY, APP_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+    insert into user_info (ID, USER_NAME, PASSWORD, 
+      NAME, SEX, STATUS, ORG_ID, 
+      EMAIL, ID_CARD, IS_ADMIN, 
+      MOBILE, LOGIN_TOKEN, CREATE_AT, 
+      UPDATE_AT, CREATE_BY, UPDATE_BY, 
+      APP_ID)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{isAdmin,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{loginToken,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, 
+      #{updateAt,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="orgId != null">
+        ORG_ID,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="isAdmin != null">
+        IS_ADMIN,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="loginToken != null">
+        LOGIN_TOKEN,
+      </if>
+      <if test="createAt != null">
+        CREATE_AT,
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT,
+      </if>
+      <if test="createBy != null">
+        CREATE_BY,
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY,
+      </if>
+      <if test="appId != null">
+        APP_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        #{isAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+    update user_info
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="orgId != null">
+        ORG_ID = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdmin != null">
+        IS_ADMIN = #{isAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="loginToken != null">
+        LOGIN_TOKEN = #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null">
+        UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        APP_ID = #{appId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+    update user_info
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      ORG_ID = #{orgId,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ID_CARD = #{idCard,jdbcType=VARCHAR},
+      IS_ADMIN = #{isAdmin,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      LOGIN_TOKEN = #{loginToken,jdbcType=VARCHAR},
+      CREATE_AT = #{createAt,jdbcType=TIMESTAMP},
+      UPDATE_AT = #{updateAt,jdbcType=TIMESTAMP},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      UPDATE_BY = #{updateBy,jdbcType=VARCHAR},
+      APP_ID = #{appId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
