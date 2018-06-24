@@ -1,6 +1,6 @@
 package com.cloud.jon.china.user.microservice.dao;
 
-import com.cloud.jon.china.user.microservice.model.UserInfo;
+import com.cloud.common.model.UserInfo;
 import org.springframework.stereotype.Repository;
 
 @Repository(value = "userInfoMapper")

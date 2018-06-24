@@ -15,8 +15,8 @@ dependencies {
     compile 'io.springfox:springfox-swagger-ui:2.7.0'
     compile 'io.springfox:springfox-swagger2:2.7.0'
     compile 'io.swagger:swagger-core:1.5.7'
-    compile 'org.projectlombok:lombok:1.16.20'
     compile project(":cloud-common")
+    compile project(":cloud-user-service-api")
 	//mybatis-generator core 包
 	compile group: 'org.mybatis.generator', name: 'mybatis-generator-core', version:'1.3.2'
     compile 'com.alibaba:druid-spring-boot-starter:1.1.4'

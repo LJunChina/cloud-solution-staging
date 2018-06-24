@@ -1,4 +1,4 @@
-package com.cloud.jon.china.user.microservice.model;
+package com.cloud.common.model;
 
 import lombok.Data;
 

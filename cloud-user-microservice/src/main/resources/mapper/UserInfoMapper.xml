@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloud.jon.china.user.microservice.dao.IUserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.cloud.jon.china.user.microservice.model.UserInfo">
+  <resultMap id="BaseResultMap" type="com.cloud.common.model.UserInfo">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
@@ -34,7 +34,7 @@
     delete from user_info
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+  <insert id="insert" parameterType="com.cloud.common.model.UserInfo">
     insert into user_info (ID, USER_NAME, PASSWORD, 
       NAME, SEX, STATUS, ORG_ID, 
       EMAIL, ID_CARD, IS_ADMIN, 
@@ -48,7 +48,7 @@
       #{updateAt,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
       #{appId,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+  <insert id="insertSelective" parameterType="com.cloud.common.model.UserInfo">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -157,7 +157,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.cloud.common.model.UserInfo">
     update user_info
     <set>
       <if test="userName != null">
@@ -211,7 +211,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cloud.jon.china.user.microservice.model.UserInfo">
+  <update id="updateByPrimaryKey" parameterType="com.cloud.common.model.UserInfo">
     update user_info
     set USER_NAME = #{userName,jdbcType=VARCHAR},
       PASSWORD = #{password,jdbcType=VARCHAR},

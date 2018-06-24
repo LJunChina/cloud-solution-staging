@@ -1,28 +1,20 @@
 package com.cloud.jon.china.user.web;
 
+import com.cloud.common.util.EmptyChecker;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.client.RestTemplate;
 
 @EnableDiscoveryClient
-@SpringBootApplication
 @EnableFeignClients
-@ComponentScan(value = {"com.cloud.base.web","com.cloud.base.sso"})
+@SpringBootApplication
 public class UserWebApplication {
 
-
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
-
 	public static void main(String[] args) {
+        if(EmptyChecker.isEmpty(System.getProperty("spring.profiles.active"))){
+            System.setProperty("spring.profiles.active","dev");
+        }
 		SpringApplication.run(UserWebApplication.class, args);
 	}
 }

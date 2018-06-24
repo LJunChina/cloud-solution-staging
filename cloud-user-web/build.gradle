@@ -5,17 +5,17 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
-	compile 'org.springframework.cloud:spring-cloud-starter-ribbon'
-	compile 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
 	compile 'org.springframework.cloud:spring-cloud-starter-feign'
     compile project(":cloud-sso-client")
+	compile project(":cloud-user-service-api")
 	compile 'com.github.penggle:kaptcha:2.3.2'
+	compile 'org.springframework.cloud:spring-cloud-starter-eureka'
 }
 
 //插件配置
 buildscript {
 	repositories {
-		maven { url "http://115.159.152.121:8080/nexus/content/groups/public/" }
+		maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")

@@ -1,6 +1,7 @@
 package com.cloud.jon.china.user.microservice.resource;
 
 import com.cloud.common.dto.Result;
+import com.cloud.jon.china.user.api.UserService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "测试页面")
 @Slf4j
 @RestController
-@RequestMapping(value = "/test")
-public class TestResource {
-
+public class TestResource implements UserService {
 
 
     @RequestMapping(value = "/{id}")
@@ -27,7 +26,8 @@ public class TestResource {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id",value = "测试编号",required = true,dataType = "java.lang.Long",paramType = "java.lang.Long" )
     })
-    public Result<?> testGetRequest(@PathVariable(value = "id") Long id){
+    @Override
+    public Result testGet(Long id) {
         log.info("params of testGetRequest:{}",id);
         Result result = new Result();
         log.info("result of testGetRequest:{}",result);

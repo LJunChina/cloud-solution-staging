@@ -1,18 +1,25 @@
 spring:
   application:
-    name: cloud-base-web
+    name: cloud-user-web
   resources:
     static-locations: classpath:/static/
-  cloud:
-    consul:
-      host: 115.159.152.121
-      port: 8500
 server:
-  port: 8020
-feign:
-  hystrix:
-    enabled: true
-sso:
-  domain : http://local.joninfo.cn:8020/login.html
-  appName : user-app
-  appUrl : http://local.joninfo.cn:8020/index.html
+  port: 9011
+---
+eureka:
+  instance:
+    appname: cloud-user-web
+  client:
+    service-url:
+     defaultZone: http://peer1:9000/eureka/,http://peer2:9001/eureka/,http://peer3:9002/eureka/
+spring:
+  profiles: ha
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@localhost:9004/eureka
+  instance:
+    appname: cloud-user-web
