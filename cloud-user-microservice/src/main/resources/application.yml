@@ -1,8 +1,34 @@
 spring:
   application:
     name: cloud-user-microservice
+  datasource:
+    name: datasource
+    url: jdbc:mysql://115.159.31.229:3306/cloud_mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: CloudBase123!@#
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      max-active: 20
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+    driver-class-name: com.mysql.cj.jdbc.Driver
 server:
   port: 9010
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 ---
 eureka:
   instance:
@@ -15,24 +41,6 @@ spring:
 ---
 spring:
   profiles: dev
-  datasource:
-      name: datasource
-      url: jdbc:mysql://115.159.31.229:3306/cloud_mall?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-      username: root
-      password: CloudBase123!@#
-      type: com.alibaba.druid.pool.DruidDataSource
-      druid:
-        filters: stat
-        max-active: 20
-        min-idle: 1
-        time-between-eviction-runs-millis: 60000
-        min-evictable-idle-time-millis: 300000
-        validation-query: select 'x'
-        test-while-idle: true
-        test-on-return: false
-        pool-prepared-statements: true
-        max-open-prepared-statements: 20
-      driver-class-name: com.mysql.cj.jdbc.Driver
 eureka:
   client:
     service-url:

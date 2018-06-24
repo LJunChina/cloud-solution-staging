@@ -1,8 +1,10 @@
 package com.cloud.jon.china.user.microservice.dao;
 
 import com.cloud.jon.china.user.microservice.model.UserInfo;
+import org.springframework.stereotype.Repository;
 
-public interface UserInfoMapper {
+@Repository(value = "userInfoMapper")
+public interface IUserInfoMapper {
     int deleteByPrimaryKey(String id);
 
     int insert(UserInfo record);

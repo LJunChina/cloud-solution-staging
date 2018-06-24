@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 //使用@Transactional @Rollback注解进行自动回滚
 @Transactional
 @Rollback
+@ActiveProfiles(value = "dev")
 @SpringBootTest
 public class UserMicroServiceApplicationTests {
 
