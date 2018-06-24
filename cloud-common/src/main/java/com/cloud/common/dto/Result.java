@@ -1,5 +1,6 @@
 package com.cloud.common.dto;
 
+import com.alibaba.fastjson.JSON;
 import com.cloud.common.enums.ResultCode;
 
 import java.io.Serializable;
@@ -53,5 +54,10 @@ public class Result<T extends Serializable> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

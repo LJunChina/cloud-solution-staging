@@ -28,7 +28,10 @@ public class TestResource {
             @ApiImplicitParam(name = "id",value = "测试编号",required = true,dataType = "java.lang.Long",paramType = "java.lang.Long" )
     })
     public Result<?> testGetRequest(@PathVariable(value = "id") Long id){
-        return new Result<>();
+        log.info("params of testGetRequest:{}",id);
+        Result result = new Result();
+        log.info("result of testGetRequest:{}",result);
+        return result;
     }
 
 }
