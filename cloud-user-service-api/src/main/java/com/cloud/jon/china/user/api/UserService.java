@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface UserService {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    Result testGet(@PathVariable(value = "id")Long id);
+    Result<String> testGet(@PathVariable(value = "id")Long id);
 }

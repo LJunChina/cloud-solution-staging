@@ -5,6 +5,6 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(value = "cloud-user-microservice")
+@FeignClient(name = "cloud-user-microservice",fallback = UserApiImpl.class)
 public interface UserApi extends UserService {
 }

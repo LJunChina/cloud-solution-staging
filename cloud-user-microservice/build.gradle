@@ -11,7 +11,6 @@ bootRun {
 dependencies {
 	compile 'org.springframework.cloud:spring-cloud-starter-eureka'
 	compile 'org.springframework.cloud:spring-cloud-starter-feign'
-    compile 'org.springframework.cloud:spring-cloud-starter-hystrix'
     compile 'mysql:mysql-connector-java:6.0.2'
     compile 'io.springfox:springfox-swagger-ui:2.7.0'
     compile 'io.springfox:springfox-swagger2:2.7.0'
