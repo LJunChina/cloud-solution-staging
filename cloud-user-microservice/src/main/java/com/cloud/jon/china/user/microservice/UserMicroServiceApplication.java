@@ -3,12 +3,10 @@ package com.cloud.jon.china.user.microservice;
 import com.cloud.common.util.EmptyChecker;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableDiscoveryClient
-@SpringBootApplication
+@SpringCloudApplication
 @EnableTransactionManagement
 @MapperScan(value = "com.cloud.jon.china.user.microservice.dao")
 public class UserMicroServiceApplication {
