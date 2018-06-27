@@ -5,6 +5,9 @@ spring:
     static-locations: classpath:/static/
 server:
   port: 9011
+feign:
+  hystrix:
+    enabled: true
 ---
 eureka:
   instance:

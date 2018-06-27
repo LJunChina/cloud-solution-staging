@@ -31,7 +31,7 @@ public class TestResource implements UserService {
     public Result<String> testGet(Long id) {
         log.info("params of testGetRequest:{}",id);
         try {
-            TimeUnit.SECONDS.sleep(3000);
+            TimeUnit.SECONDS.sleep(3);
         }catch (Exception e){
             log.error("exception",e);
         }
