@@ -1,0 +1,31 @@
+group = 'com.cloud.jon.china'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+	compile 'org.springframework.cloud:spring-cloud-starter-feign'
+	compile 'org.springframework.cloud:spring-cloud-starter-hystrix'
+    compile project(":cloud-sso-client")
+	compile project(":cloud-user-service-api")
+	compile 'com.github.penggle:kaptcha:2.3.2'
+	compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+}
+
+//插件配置
+buildscript {
+	repositories {
+		maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+

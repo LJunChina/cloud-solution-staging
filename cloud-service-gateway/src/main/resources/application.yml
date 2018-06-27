@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: cloud-service-gateway
+server:
+  port: 9020
+---
+eureka:
+  instance:
+    appname: cloud-user-web
+  client:
+    service-url:
+     defaultZone: http://peer1:9000/eureka/,http://peer2:9001/eureka/,http://peer3:9002/eureka/
+spring:
+  profiles: ha
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:eureka@localhost:9004/eureka
+  instance:
+    appname: cloud-service-gateway
