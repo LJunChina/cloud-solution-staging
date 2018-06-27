@@ -5,12 +5,9 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
-	compile 'org.springframework.cloud:spring-cloud-starter-feign'
-	compile 'org.springframework.cloud:spring-cloud-starter-hystrix'
-    compile project(":cloud-sso-client")
-	compile project(":cloud-user-service-api")
-	compile 'com.github.penggle:kaptcha:2.3.2'
+    compile 'org.springframework.cloud:spring-cloud-starter-zuul'
 	compile 'org.springframework.cloud:spring-cloud-starter-eureka'
+    compile project(":cloud-common")
 }
 
 //插件配置
