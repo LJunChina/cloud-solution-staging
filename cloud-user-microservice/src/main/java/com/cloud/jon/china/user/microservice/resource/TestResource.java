@@ -30,11 +30,11 @@ public class TestResource implements UserService {
     @Override
     public Result<String> testGet(Long id) {
         log.info("params of testGetRequest:{}",id);
-        try {
+        /*try {
             TimeUnit.SECONDS.sleep(3);
         }catch (Exception e){
             log.error("exception",e);
-        }
+        }*/
         Result<String> result = new Result<>();
         result.setData("normal");
         log.info("result of testGetRequest:{}",result);

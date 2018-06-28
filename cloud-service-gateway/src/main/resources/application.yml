@@ -3,6 +3,11 @@ spring:
     name: cloud-service-gateway
 server:
   port: 9020
+zuul:
+  routes:
+    user-api:
+      path: /user-api/**
+      serviceId: cloud-user-microservice
 ---
 eureka:
   instance:
