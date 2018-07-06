@@ -7,3 +7,4 @@ spring:
     password: CloudBase123!@#
     username: superman
     host: 115.159.152.121
+    virtual-host: /

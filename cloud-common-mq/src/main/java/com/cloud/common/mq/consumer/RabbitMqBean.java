@@ -1,4 +1,4 @@
-package com.cloud.common.mq.config;
+package com.cloud.common.mq.consumer;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;
