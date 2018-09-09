@@ -7,7 +7,8 @@ apply plugin: 'io.spring.dependency-management'
 dependencies {
 	compile 'org.springframework.cloud:spring-cloud-starter-eureka-server'
     compile 'org.springframework.boot:spring-boot-starter-security'
-
+	compile 'org.springframework.boot:spring-boot-starter-test'
+	compile project(":cloud-common")
 }
 
 bootRun {

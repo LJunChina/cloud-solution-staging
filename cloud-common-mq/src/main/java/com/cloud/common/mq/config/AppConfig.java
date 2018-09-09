@@ -18,9 +18,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableRabbit
 @ComponentScan(basePackages = "com.cloud.common.mq.consumer")
 public class AppConfig {
+
     @Bean
     public Queue Queue() {
-        return new Queue("hello");
+        return new Queue("my-queue");
     }
 
     @Bean

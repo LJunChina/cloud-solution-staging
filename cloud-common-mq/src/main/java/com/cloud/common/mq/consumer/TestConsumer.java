@@ -1,7 +1,6 @@
 package com.cloud.common.mq.consumer;
 
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +9,10 @@ import org.springframework.stereotype.Component;
  * @create 2018/7/6
  */
 @Component
+@RabbitListener(containerFactory="rabbitListenerContainerFactory",
+        bindings = @QueueBinding(value = @Queue(value = "my-queue",durable = "true"),exchange = @Exchange(value = "my-exchange",delayed = "true")))
 public class TestConsumer {
 
-    @RabbitListener(queues = "test",containerFactory="rabbitListenerContainerFactory")
     @RabbitHandler
     public void processMessage(@Payload byte[] content){
         System.out.println("receive message:"+ new String(content));

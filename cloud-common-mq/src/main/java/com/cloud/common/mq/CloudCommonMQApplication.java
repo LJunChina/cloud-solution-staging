@@ -15,8 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CloudCommonMQApplication {
 
 
-    @Autowired
-    private MessageProducer messageProducer;
+    /*@Autowired
+    private MessageProducer messageProducer;*/
 
     public static void main(String[] args) {
         /*if(EmptyChecker.isEmpty(System.getProperty("spring.profiles.active"))){

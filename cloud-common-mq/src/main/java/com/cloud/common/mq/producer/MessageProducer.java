@@ -1,6 +1,9 @@
 package com.cloud.common.mq.producer;
 
 import com.cloud.common.mq.consumer.RabbitMqBean;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +18,11 @@ public class MessageProducer {
     private RabbitMqBean rabbitMqBean;
 
     public void senMsg(){
-        this.rabbitMqBean.getAmqpTemplate().convertAndSend("nima");
+        Message message = MessageBuilder.withBody("nima".getBytes())
+                .setContentType(MessageProperties.CONTENT_TYPE_TEXT_PLAIN)
+                .setMessageId("test")
+                .setHeader("x-delay","10000")
+                .build();
+        this.rabbitMqBean.getAmqpTemplate().convertAndSend(message);
     }
 }
