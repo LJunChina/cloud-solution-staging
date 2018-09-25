@@ -45,4 +45,13 @@ public class FileApiTest extends UserWebApplicationTests {
     }
 
 
+
+    @Test
+    public void save(){
+        FileRequestDto dto = new FileRequestDto();
+        dto.setDisplayName("test");
+        dto.setCode(23);
+        log.info("result of save:{}",this.fileApi.save(dto));
+    }
+
 }

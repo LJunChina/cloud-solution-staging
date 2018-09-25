@@ -5,6 +5,7 @@ import com.cloud.jon.china.user.dto.FileRequestDto;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,13 @@ public class FileResource {
         log.info("params of upload:{},and file name:{}",requestDto,file.getOriginalFilename());
         //File newFile = new File("");
         //file.transferTo();
+        return new BaseRespDTO();
+    }
+
+
+    @PostMapping(value = "/save")
+    public BaseRespDTO save(@RequestBody FileRequestDto dto){
+        log.info("params of save:{}",dto);
         return new BaseRespDTO();
     }
 }
