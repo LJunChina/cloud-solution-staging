@@ -1,4 +1,4 @@
-package com.cloud.common.mq.consumer;
+package com.cloud.job.china.consumer;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.AmqpTemplate;

@@ -1,4 +1,4 @@
-package com.cloud.common.mq;
+package com.cloud.job.china;
 
 import lombok.Data;
 

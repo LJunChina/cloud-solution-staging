@@ -1,4 +1,4 @@
-package com.cloud.common.mq;
+package com.cloud.job.china;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;

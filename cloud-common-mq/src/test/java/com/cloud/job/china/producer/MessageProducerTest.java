@@ -1,6 +1,6 @@
-package com.cloud.common.mq.producer;
+package com.cloud.job.china.producer;
 
-import com.cloud.common.mq.CloudCommonMQApplicationTest;
+import com.cloud.job.china.CloudCommonMQApplicationTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,4 +1,4 @@
-package com.cloud.common.mq.consumer;
+package com.cloud.job.china.consumer;
 
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.messaging.handler.annotation.Payload;

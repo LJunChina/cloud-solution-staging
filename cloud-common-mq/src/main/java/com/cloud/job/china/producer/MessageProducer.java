@@ -1,6 +1,6 @@
-package com.cloud.common.mq.producer;
+package com.cloud.job.china.producer;
 
-import com.cloud.common.mq.consumer.RabbitMqBean;
+import com.cloud.job.china.consumer.RabbitMqBean;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageProperties;

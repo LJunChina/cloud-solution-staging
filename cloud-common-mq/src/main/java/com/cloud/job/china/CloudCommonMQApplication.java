@@ -1,9 +1,5 @@
-package com.cloud.common.mq;
+package com.cloud.job.china;
 
-import com.cloud.common.mq.consumer.RabbitMqBean;
-import com.cloud.common.mq.producer.MessageProducer;
-import com.cloud.common.util.EmptyChecker;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

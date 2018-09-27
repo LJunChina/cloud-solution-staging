@@ -1,4 +1,4 @@
-package com.cloud.common.mq.config;
+package com.cloud.job.china.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
