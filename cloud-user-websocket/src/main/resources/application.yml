@@ -1,0 +1,10 @@
+server:
+  port: 9050
+spring:
+  application:
+    name: cloud-common-mq
+  rabbitmq:
+    password: CloudBase123!@#
+    username: superman
+    host: 115.159.152.121
+    virtual-host: /
