@@ -17,5 +17,7 @@ public class WebParameterUtilTest {
         map.put("name", "name");
         map.put("age", "23");
         System.out.println(WebParameterUtil.generatorRestStyle("http://www.baidu.com", map));
+
+        System.out.println(System.currentTimeMillis());
     }
 }
