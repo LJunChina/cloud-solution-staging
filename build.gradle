@@ -16,8 +16,8 @@ subprojects{
 
     //定义版本号
     ext {
-        springCloudVersion = 'Dalston.SR4'
-        springBootVersion = '1.5.8.RELEASE'
+        springCloudVersion = 'Edgware.SR5'
+        springBootVersion = '1.5.13.RELEASE'
     }
     repositories {
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
