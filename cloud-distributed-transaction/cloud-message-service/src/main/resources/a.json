@@ -1,0 +1,31 @@
+[
+  {
+    "methods": [
+      "GET"
+    ],
+    "produce": "application/json;charset=UTF-8",
+    "url": "/handler/mapping1"
+  },
+  {
+    "methods": [
+      "POST"
+    ],
+    "produce": "application/json;charset=UTF-8",
+    "url": "/handler/mapping2"
+  },
+  {
+    "methods": [],
+    "produce": "application/json;charset=UTF-8",
+    "url": "/handler/mapping3"
+  },
+  {
+    "methods": [],
+    "produce": "application/json;charset=UTF-8",
+    "url": "/error"
+  },
+  {
+    "methods": [],
+    "produce": "text/html",
+    "url": "/error"
+  }
+]
