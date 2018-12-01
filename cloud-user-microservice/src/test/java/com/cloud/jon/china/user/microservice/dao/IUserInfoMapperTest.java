@@ -1,9 +1,14 @@
 package com.cloud.jon.china.user.microservice.dao;
 
+import com.cloud.common.enums.YesOrNoEnum;
+import com.cloud.common.model.UserInfo;
 import com.cloud.jon.china.user.microservice.UserMicroServiceApplicationTests;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +23,19 @@ public class IUserInfoMapperTest extends UserMicroServiceApplicationTests {
 
     @Test
     public void insert() throws Exception {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(UUID.randomUUID().toString());
+        userInfo.setEmail("test");
+        userInfo.setName("test");
+        userInfo.setAppId(UUID.randomUUID().toString());
+        userInfo.setIsAdmin(YesOrNoEnum.YES.getCode());
+        userInfo.setIdCard("123");
+        userInfo.setMobile("1234556");
+        userInfo.setSex("1");
+        userInfo.setStatus("00");
+        userInfo.setCreateAt(new Date());
+        userInfo.setCreateBy("system");
+        this.userInfoMapper.insert(userInfo);
     }
 
     @Test

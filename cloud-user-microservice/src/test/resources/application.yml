@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: cloud-user-microservice
+  datasource:
+    name: datasource
+    url: jdbc:h2:mem:cloud_mall;MODE=MYSQL;
+    username: root
+    password: CloudBase123!@#
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      max-active: 20
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/schema.sql
+    data: classpath:db/schema.sql
+    platform: h2
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+server:
+  port: 9010
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+eureka:
+  client:
+    enabled: false
