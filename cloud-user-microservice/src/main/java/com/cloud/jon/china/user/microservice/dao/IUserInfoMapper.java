@@ -16,4 +16,6 @@ public interface IUserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+
+    int testDelete(String id);
 }

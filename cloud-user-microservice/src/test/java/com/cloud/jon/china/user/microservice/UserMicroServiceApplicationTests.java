@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(SpringRunner.class)
 @MapperScan(value = "com.cloud.jon.china.user.microservice.dao")
 //使用@Transactional @Rollback注解进行自动回滚
@@ -26,7 +28,7 @@ public class UserMicroServiceApplicationTests {
 	}
 
     protected void assertResultCode(BaseRespDTO result){
-        Assert.assertTrue(ResultCode.OK.getCode().equals(result.getCode()));
+        assertEquals(ResultCode.OK.getCode(), result.getCode());
     }
 
 }

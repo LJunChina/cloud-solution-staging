@@ -55,4 +55,10 @@ public class IUserInfoMapperTest extends UserMicroServiceApplicationTests {
     public void updateByPrimaryKey() throws Exception {
     }
 
+    @Test
+    public void testDelete(){
+        int i = userInfoMapper.testDelete("18a440b1-0a77-11e8-a420-525400728206");
+        assertEquals(1,i);
+    }
+
 }

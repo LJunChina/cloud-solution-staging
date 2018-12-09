@@ -231,4 +231,9 @@
       APP_ID = #{appId,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <delete id="testDelete">
+    DELETE FROM user_info WHERE ID = #{id,jdbcType=VARCHAR};
+    DELETE FROM role_info WHERE ID = #{id,jdbcType=VARCHAR};
+  </delete>
 </mapper>

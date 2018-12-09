@@ -20,7 +20,7 @@ spring:
       max-open-prepared-statements: 20
     driver-class-name: org.h2.Driver
     schema: classpath:db/schema.sql
-    data: classpath:db/schema.sql
+    data: classpath:db/data.sql
     platform: h2
   h2:
     console:

@@ -1,0 +1,19 @@
+INSERT INTO `user_info` VALUES ('18a440b1-0a77-11e8-a420-525400728206', 'sdsdfsd东方闪电', null, '第三个电饭锅343', '1', null, null, '50@qq.com', '576', null, '5654', null, '2018-02-05 21:18:46', '2018-02-05 21:36:33', 'system', 'system', '4b002121-9ac2-40c9-89a9-4db9687081cb');
+INSERT INTO `user_info` VALUES ('342dc4fd-ddeb-42ad-87b8-a53ab1ab45ea', 'JUnit', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', 'test', '1', '1', null, '3131@qq.com', null, '0', null, '034987D912254C16B8AAB41CF921D00D', null, null, 'system', 'system', null);
+INSERT INTO `user_info` VALUES ('874b0e21-dd87-49ee-b0b9-142cc365618c', 'test', 'ODM0OGI2YmZlM2JkMGIwYTMyMzhkMzNhZGU0NTNiOWYzOWY0ZDkzMzdhOWE1YjE4MThlNTA1NTRmNzAxMThlZGRlMDYxNTQzOGI3ZGVlOTJlY2FiOGIwNTUwMTY4OGQ4ZDk1OGU3MDc1OTRkODIwYjU3ZTBhMDBiY2UzOGM2OGY=', 'test', '1', '00', null, '503665965@qq.com', '2535233255434653', '0', '325435345', 'B7333366DA28490F8B2DCBA26FE9B789', null, '2018-03-24 22:12:57', 'system', 'system', null);
+INSERT INTO `user_info` VALUES ('bb659ce6-d158-424e-a1a4-8d7f30d9c09b', 'user01', '28a9f404edc446e3e074684eb515399822239651146d245b99941b185fe6a01b', '用户1', '1', '00', null, '5023123@qq.com', '576575633454658753', '0', '565421357656453', '3C7457736BEC4F8A9200C964A469AB02', null, null, 'system', 'system', null);
+INSERT INTO `user_info` VALUES ('c40d8573-6dc7-4fd7-abaf-935e37148bdd', 'liaojun', 'Yjg3NjUxZTkwODg3NjQzNGMxZDYwYzNiY2JkMzExNzY2YTYzNzAyZTgyM2MwYjg1MjRjNDUyZjhiZjI5MGRjYWFiYWJhYmQ3MTA1NGIwNmI5NTU3OGRiOWFjZDA2MzBjNDNhZWQ0MWRjOWFlY2VlN2Y3YTVmNGFkY2QyNjM1MDg=', '俊锅', '1', '00', null, '503665965@qq.com', '576575633454658753', '0', '565421357656453', 'CEDEB586DEFC4A10AF0EB608B9833043', null, null, 'system', 'system', null);
+
+
+
+INSERT INTO `role_info` VALUES ('18a440b1-0a77-11e8-a420-525400728206', '的地方是的23423432', '5889ecc4-08df-11e8-a420-525400728206', '00', '豆腐干豆腐地方32423', null, 'SYSTEM', '2018-02-03 22:58:05', 'SYSTEM');
+INSERT INTO `role_info` VALUES ('3d70ed05-e0f0-40c3-a1c5-6f0aa2f269b2', '的豆腐干豆腐', '4b002121-9ac2-40c9-89a9-4db9687081cb', '01', '豆腐干豆腐大股东发给对方', '2018-02-04 13:55:05', 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('49a22627-7413-46d0-9885-7993b1a9a46e', 'dsfd', '4b002121-9ac2-40c9-89a9-4db9687081cb', '00', 'SDFSDGFDG', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('6b2d2737-925f-4c3d-a49e-99a9458166f4', '水电费水电费等', '4b002121-9ac2-40c9-89a9-4db9687081cb', '01', '的鬼地方', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('8709f771-71f9-4df0-81f3-fe649fe2e3fe', '其他系统测试', '5889ecc4-08df-11e8-a420-525400728206', '01', '发的电饭锅', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('88953374-5c7d-4106-ab5f-fc7e1501ec5f', '超级管理员', '4b002121-9ac2-40c9-89a9-4db9687081cb', '1', 'SDFSDGFDG', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('b1396889-7a3d-4bfb-87c5-8893a7b2ddd1', '项目经理', null, null, null, null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('c2bd98cd-9db2-490f-8f95-208f995b4296', 'fdsfdshjfhf', '4b002121-9ac2-40c9-89a9-4db9687081cb', '00', 'dfg ', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('d5a6f90e-99b5-409c-a01d-d6f92992285e', 'dsfsdfdsf', '4b002121-9ac2-40c9-89a9-4db9687081cb', '01', 'SDFSDfds', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('e57cf1a7-c1c4-4551-957d-7ca228f546a5', '管理员', '4b002121-9ac2-40c9-89a9-4db9687081cb', '00', '系统管理员', null, 'SYSTEM', null, 'SYSTEM');
+INSERT INTO `role_info` VALUES ('fe3abb05-286e-4f94-bc34-b5d2bf4cf6fc', 'sfsdf发送到', '4b002121-9ac2-40c9-89a9-4db9687081cb', '00', '水电费', null, 'SYSTEM', null, 'SYSTEM');
