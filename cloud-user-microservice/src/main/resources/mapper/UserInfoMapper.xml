@@ -236,4 +236,8 @@
     DELETE FROM user_info WHERE ID = #{id,jdbcType=VARCHAR};
     DELETE FROM role_info WHERE ID = #{id,jdbcType=VARCHAR};
   </delete>
+
+    <select id="queryLastDay" resultType="java.util.Date">
+        SELECT NOW()-INTERVAL 24 HOUR
+    </select>
 </mapper>

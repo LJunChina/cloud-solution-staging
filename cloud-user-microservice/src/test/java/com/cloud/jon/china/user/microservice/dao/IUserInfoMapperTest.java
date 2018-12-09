@@ -61,4 +61,10 @@ public class IUserInfoMapperTest extends UserMicroServiceApplicationTests {
         assertEquals(1,i);
     }
 
+    @Test
+    public void queryLastDay(){
+        Date date = userInfoMapper.queryLastDay();
+        assertNotNull(date);
+    }
+
 }

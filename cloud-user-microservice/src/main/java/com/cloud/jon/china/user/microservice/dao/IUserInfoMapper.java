@@ -3,6 +3,8 @@ package com.cloud.jon.china.user.microservice.dao;
 import com.cloud.common.model.UserInfo;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+
 @Repository(value = "userInfoMapper")
 public interface IUserInfoMapper {
     int deleteByPrimaryKey(String id);
@@ -18,4 +20,6 @@ public interface IUserInfoMapper {
     int updateByPrimaryKey(UserInfo record);
 
     int testDelete(String id);
+
+    Date queryLastDay();
 }
